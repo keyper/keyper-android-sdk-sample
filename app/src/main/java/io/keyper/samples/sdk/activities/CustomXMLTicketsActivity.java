@@ -1,7 +1,9 @@
-package io.keyper.samples.sdk;
+package io.keyper.samples.sdk.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import io.keyper.samples.sdk.R;
 
 /**
  * Created by petar@creativepragmatics.com on 22/06/16.

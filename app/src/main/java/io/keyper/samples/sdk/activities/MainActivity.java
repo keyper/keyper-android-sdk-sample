@@ -1,4 +1,4 @@
-package io.keyper.samples.sdk;
+package io.keyper.samples.sdk.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import io.keyper.android.sdk.KeyperSDK;
 import io.keyper.android.sdk.KeyperTicketsActivity_;
+import io.keyper.samples.sdk.R;
+import io.keyper.samples.sdk.SampleApp;
+import io.keyper.samples.sdk.services.GCMRegistrationIntentService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
       });
     }
 
+    registerForPushNotifications();
   }
 
   @Override
@@ -51,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
       return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  /*
+    Starts a service that registers the device for push notifications with the keyper service.
+
+    Do not forget to add your own GCM Sender ID in the build.gradle file
+   */
+  private void registerForPushNotifications() {
+    startService(new Intent(MainActivity.this, GCMRegistrationIntentService.class));
   }
 
   /*

@@ -3,8 +3,9 @@ apply plugin: 'com.android.application'
 repositories {
     jcenter()
     maven { url "http://keyper.bintray.com/keyper" }
-    mavenLocal()
 }
+
+def gcm_id = "\"\"" // Add your GCM sender id
 
 android {
     compileSdkVersion 23
@@ -21,6 +22,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "GCM_SENDER_ID", "${gcm_id}"
+        }
+
+        debug {
+            buildConfigField "String", "GCM_SENDER_ID", "${gcm_id}"
         }
     }
 }
@@ -31,5 +38,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
 
-    compile 'io.keyper.android:keyper-sdk:0.9.1' // import the keyper SDK
+    compile 'com.google.android.gms:play-services-gcm:9.0.0' // TODO try with 9.0.2 and update play services in sdk and guide
+
+    compile 'io.keyper.android:keyper-sdk:0.9.0' // import the keyper SDK
 }

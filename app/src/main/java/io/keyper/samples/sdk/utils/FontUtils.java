@@ -1,4 +1,4 @@
-package io.keyper.samples.sdk;
+package io.keyper.samples.sdk.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;

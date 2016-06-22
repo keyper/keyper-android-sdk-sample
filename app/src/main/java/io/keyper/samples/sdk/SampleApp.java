@@ -3,6 +3,7 @@ package io.keyper.samples.sdk;
 import android.app.Application;
 
 import io.keyper.android.sdk.KeyperSDK;
+import io.keyper.samples.sdk.utils.FontUtils;
 
 /**
  * Created by petar@creativepragmatics.com on 22/06/16.
