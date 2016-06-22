@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KeyperSDKSample</string>
+    <string name="action_settings">Settings</string>
+    <string name="btn_start_sdk">Tickets</string>
+    <string name="lbl_toolbar_title">Tickets SDK</string>
+    <string name="err_keyper_login_failed">Unfortunately, the login to the keyper service has failed.</string>
+</resources>
