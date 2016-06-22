@@ -3,10 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:allowBackup="true"
+        android:name=".SampleApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -19,8 +18,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CustomXMLTicketsActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".CustomXMLTicketsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".CustomTicketsActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

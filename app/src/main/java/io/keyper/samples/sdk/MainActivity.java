@@ -35,38 +35,52 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_main, menu);
+    KeyperSDK keyper = ((SampleApp) getApplication()).getKeyperSDK();
+    if (keyper.isAuthenticated()) {
+      getMenuInflater().inflate(R.menu.menu_main, menu);
+    } else {
+      menu.clear();
+    }
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
+    if (item.getItemId() == R.id.action_logout) {
+      logout();
       return true;
     }
-
     return super.onOptionsItemSelected(item);
   }
 
+  /*
+    Starts the keyper ticketing area.
+    The methods first checks if the keyper sdk has a user logged in and authenticates if necessary.
+
+    Note that the default route identifier "keyper" works only in the sandbox environment. You can setup your own
+    in the B2B web app.
+
+    Note that the provided auth_token might be invalid when you try this code. To generate a new one, use the
+    keyper_auth_token.sh provided with this sample.
+   */
   private void authenticateAndStartKeyper() {
-    KeyperSDK keyper = ((App) getApplication()).getKeyperSDK();
+    KeyperSDK keyper = ((SampleApp) getApplication()).getKeyperSDK();
 
     if (keyper.isAuthenticated()) {
       startKeyper();
     } else {
-      String routeIdentifier = "keyper"; // or your own from the B2B webapp
-      String hostAppSessionToken = "[INSERT YOUR TOKEN HERE]"; // you can obtain a token by executing the create_test_user.sh script
+      String routeIdentifier = "keyper";
+      String hostAppSessionToken = "3389a825-c5f0-4370-ac2d-888a4121f40e";
       keyper.login(routeIdentifier, hostAppSessionToken, new KeyperSDK.SessionCallback() {
         @Override
         public void onSuccess() {
+          invalidateOptionsMenu();
           startKeyper();
         }
 
         @Override
         public void onError() {
+          invalidateOptionsMenu();
           Toast.makeText(MainActivity.this, R.string.err_keyper_login_failed, Toast.LENGTH_LONG).show();
         }
       });
@@ -80,6 +94,24 @@ public class MainActivity extends AppCompatActivity {
     // uncomment one of the lines below:
 
     //startActivity(new Intent(MainActivity.this, CustomXMLTicketsActivity.class));
-    //startActivity(new Intent(MainActivity.this, CustomXMLTicketsActivity.class));
+    //startActivity(new Intent(MainActivity.this, CustomTicketsActivity.class));
+  }
+
+  /*
+    Logs out from the keyper service and invalidates the options menu.
+   */
+  private void logout() {
+    KeyperSDK keyper = ((SampleApp) getApplication()).getKeyperSDK();
+    keyper.logout(new KeyperSDK.SessionCallback() {
+      @Override
+      public void onSuccess() {
+        invalidateOptionsMenu();
+      }
+
+      @Override
+      public void onError() {
+        invalidateOptionsMenu();
+      }
+    });
   }
 }
