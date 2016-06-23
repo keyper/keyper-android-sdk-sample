@@ -17,6 +17,9 @@ import io.keyper.samples.sdk.services.GCMRegistrationIntentService;
 
 public class MainActivity extends AppCompatActivity {
 
+  private static final String ROUTE_IDENTIFIER = "keyper";
+  private static final String HOST_APP_TOKEN = "ebf73bef-99ff-47a9-b392-1e1f73d2f9bd";
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     View button = findViewById(R.id.btn_start_sdk);
     if (button != null) {
+      // adds a click listener that authenticates and starts the mobile ticketing area.
       button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -34,8 +38,17 @@ public class MainActivity extends AppCompatActivity {
       });
     }
 
+    // registers this app for push notifications
     registerForPushNotifications();
+
+    // checks if the activity is started from a notification.
+    Intent intent = getIntent();
+    boolean shouldAuthenticateAndStartKeyper = intent.getBooleanExtra("AuthenticateAndShowKeyperTickets", false);
+    if (shouldAuthenticateAndStartKeyper) {
+      authenticateAndStartKeyper();
+    }
   }
+
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,9 +95,7 @@ public class MainActivity extends AppCompatActivity {
     if (keyper.isAuthenticated()) {
       startKeyper();
     } else {
-      String routeIdentifier = "keyper";
-      String hostAppSessionToken = "3389a825-c5f0-4370-ac2d-888a4121f40e";
-      keyper.login(routeIdentifier, hostAppSessionToken, new KeyperSDK.SessionCallback() {
+      keyper.login(ROUTE_IDENTIFIER, HOST_APP_TOKEN, new KeyperSDK.SessionCallback() {
         @Override
         public void onSuccess() {
           invalidateOptionsMenu();
