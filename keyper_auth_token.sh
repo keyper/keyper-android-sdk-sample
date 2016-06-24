@@ -9,7 +9,7 @@ function display_usage {
     echo "Usage: $0 [first_name] [last_name] [email] [password]"
     echo ""
     echo "Example:"
-    echo "$0 Jon Snow jon.snow@got.com supersafepassword"
+    echo "$0 Jon Snow jon.snow@keyper.ws supersafepassword"
     echo ""
 }
 
