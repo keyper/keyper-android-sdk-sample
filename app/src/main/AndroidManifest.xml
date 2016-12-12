@@ -17,6 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_kkybKrZ55U5rIbJ0dgB3JfmmuzgibqjK" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -53,6 +54,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <data android:scheme="keypersampleapp" android:host="open" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
 

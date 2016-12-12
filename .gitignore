@@ -3,6 +3,9 @@
 /.idea/workspace.xml
 /.idea/libraries
 /.idea/vcs.xml
+/.idea/dictionaries
+/.idea/markdown-navigator
+.idea/markdown-navigator.xml
 
 # Android Studio Navigation editor temp files
 .navigation/
@@ -43,3 +46,5 @@ proguard/
 
 # Keystore files
 *.jks
+
+projectFilesBackup/

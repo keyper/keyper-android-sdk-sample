@@ -29,7 +29,7 @@ public class GCMRegistrationIntentService extends IntentService {
       sendRegistrationToServer(token);
 
     } catch (Exception e) {
-      Log.d("GCM", "Failed to complete token refresh", e);
+      Log.d("GCM", "Failed to complete token refresh. If you want to test the push notifications, add your own GCM id in build.gradle", e);
     }
   }
 

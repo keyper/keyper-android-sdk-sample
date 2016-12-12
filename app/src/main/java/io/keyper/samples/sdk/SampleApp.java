@@ -2,6 +2,7 @@ package io.keyper.samples.sdk;
 
 import android.app.Application;
 
+import io.branch.referral.Branch;
 import io.keyper.android.sdk.KeyperSDK;
 import io.keyper.samples.sdk.utils.FontUtils;
 
@@ -15,7 +16,10 @@ public class SampleApp extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
+    // we initialize branch.io here
+    Branch.getAutoInstance(this);
 
+    // we initialize the keyper sdk and customize it.
     initKeyperSDK();
   }
 

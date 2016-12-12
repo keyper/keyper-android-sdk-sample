@@ -3,7 +3,7 @@
  
 Contact: *dev@keyper.io*
 
-Last Updated: *23.06.2016*
+Last Updated: *06.12.2016*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 
@@ -23,14 +23,14 @@ Then include the keyper SDK as a dependency:
 
 ```
 dependencies {
-	compile 'io.keyper.android:keyper-sdk:0.9.0'
+	compile 'io.keyper.android:keyper-sdk:0.9.3'
 }
 ```
 
 Hit Sync, gradle will build the project and you should be ready to go.
 
 #### Troubleshooting
-If you get the following error while building, then you have to enable multi dex support.
+If you get the following error while building, then you have to enable multi dex support. You can learn more at the link below.
 
 ```
 Error: The number of method references in a .dex file cannot exceed 64K.
@@ -41,6 +41,23 @@ To do so, just add the following line to your `defaultConfig` closure:
 
 ```
 multiDexEnabled true
+```
+
+Then add this dependency to your build.gradle dependencies closure: 
+
+```
+compile 'com.android.support:multidex:1.0.1'
+``` 
+
+Finally, you have to add use a MiltiDexApplication class. If you do not use a custom Application class, then just add the following to your `application` tag in AndroidManifest.xml
+```
+android:name="android.support.multidex.MultiDexApplication"
+```
+
+If on the other hand you have your own application subclass, then just add the following line in the `onAttachBaseContext(Context base)` method in your custom application class:
+
+```
+Multidex.install(this);
 ```
 
 Depending on your Android Studio settings, you might get an error, that there is not enough heap space. If that is the case, then you can increase it by adding the following to your `android` closure:
@@ -71,13 +88,18 @@ The SDK utilizes the following permissions:
 ## Sample App
 If you want to see a working app, please checkout this repository.
 
-Once you checkout the repository, you will have to do two things in order to test all features of the SDK.
+Once you checkout the repository, you will have to do a few things in order to test all features of the SDK.
 
-1) Add your own gcm_id in `app/build.gradle` if you want to test the push notifications as well. If you are not sure how to do this, please consult the [GCM guide](https://developers.google.com/cloud-messaging/gcm).
+1) Create and login with your own keyper test user with the `keyper_auth_token.sh` script. It will give you an auth token (uuid), which you can then change in the `MainActivity#HOST_APP_TOKEN`. You will have to add a new token each time you logout from the app. Note that usually you will receive a toke
+from an Oauth Service or similar.
 
-2) Create and login with your own keyper test user with the `keyper_auth_token.sh` script. It will give you an auth token (uuid), which you can then change in the `MainActivity#HOST_APP_TOKEN`. You will have to add a new token each time you logout from the app.
+2) (Optional) Add your own gcm_id in `app/build.gradle` if you want to test the push notifications as well. If you are not sure how to do this, please consult the [GCM guide](https://developers.google.com/cloud-messaging/gcm).
 
-Once you have done these two steps, you can run the app on an emulator or a device.
+3) (Optional) If you use branch.io for deep linking, you can integrate branch in your own app and pass the deep link information to the keyper sdk. The keyper sdk will handle the deep link and will help you improve your apps UX. Read more below.
+
+4) There is no step 4.
+
+Once you have done these steps, you can run the app on an emulator or a device.
 
 If you'd like to integrate the SDK in your own app, please consult the next chapter.
 
@@ -179,9 +201,9 @@ If you want your users to obtain keyper notifications, e.g. when they get a new 
 sdk.subscribeForPushNotifications(gcmToken); // gcmToken is a String
 ```
 
-You should call this method everytime, when the gcm token gets refreshed. Follow the link to see how to obtain and handle [GCM push notifications on android](https://developers.google.com/cloud-messaging/android/client).
+You should call this method every time, when the gcm token gets refreshed. Follow the link to see how to obtain and handle [GCM push notifications on android](https://developers.google.com/cloud-messaging/android/client).
 
-2) In order to allow the keyper SDK to handle the received notificaitons, you have to propagate them to the SDK, once you received them. The SDK offers you a few helper methods, to help you do that.
+2) In order to allow the keyper SDK to handle the received notifications, you have to propagate them to the SDK, once you received them. The SDK offers you a few helper methods, to help you do that.
 
 Once you obtain a notification (a Bundle object usually in `GcmListenerService.onMessageReceived(String s, Bundle bundle)`), you can inspect the notification like so:
 
@@ -198,7 +220,7 @@ The easiest is, to just pass the `Bundle` object to
 sdk.handleNotification(bundle);
 ```
 
-A call to this method will inspect the notification, checking if the app is in background or foreground and handle the notificaitons accordingly. If the app is in background or not started, then a notificaiton will be shown within the system status bar. If the mobile ticket area is open, then the app will handle the notification silently and update its relevant views.
+A call to this method will inspect the notification, checking if the app is in background or foreground and handle the notifications accordingly. If the app is in background or not started, then a notification will be shown within the system status bar. If the mobile ticket area is open, then the app will handle the notification silently and update its relevant views.
 
 **Important**: If you have initialized the SDK with a context other than an Activity or Application, then the SDK cannot infer if the app is in background or foreground. In such cases a notification will always be displayed in the system status bar.
 
@@ -207,6 +229,19 @@ There is one issue with this type of notification handling. Nothing will happen,
 You can use: `sdk.getRecommendedAction(bundle);`, which will return a `KeyperNotificationRecommendedHostAppAction` enum.
 
 The enum has a few recommended actions, which you can use as a hint to infer what kind of PendingIntent to set. In general, you can prepare a pending intent showing the KeyperTicketsActivity or your own wrapping activity of KeyperTicketsFragment, or you have to first login and then start the KeyperTicketsActivity or your own one.
+
+### Deep Linking with Branch.io
+
+If you have a mobile web app that displays ticket data, or if you'd like to forward your mobile web users to your native mobile app, you can use branch.io. This improves the UX tremendously and will probably improve your conversion rate.  If you are willing to go the extra mile, first you will have to integrate branch.io in your project. You can find more infos at http://branch.io, but a reference implementation has been added to this project for your convenience as well.
+
+Once your app is summoned via branch, you can just pass the deep link information (JSONObject) to the keyper sdk and it will take care of most of the work. However, if you utilize branch for other purposes as well, you might want to inspect if the deep link is a keyper link first and pass it to the keyper sdk only in such instances. To do so, you can use the `isKeyperDeepLink` method.
+
+If you don't care about this, you can just forward the deep link info to the sdk and it will handle it for you. Don't worry, it is null safe.
+
+In some instances, the sdk will need input from the user and for that the keyper root screen has to be started. We like to give you full control of when to do this, as your app might do something else that is more important right now (e.g. completing a purchase). In order to know if the sdk has to be started, you can implement a simple broadcast receiver and listen for the `KeyperSDK.Events.KPR_BCR_ACTION_SHOW_KEYPER_SCREEN` action. Once you receive such a broadcast you can finish whatever you are doing and start the sdk at your convenience.
+One example of such a state would be, if you open the app from a web link with the user abc@sampleapp.com but the current logged in user within your sample app is xyz@sampleapp.com. The keyper SDK will detect such states and will request that you start it. Once you do, the SDK will prompt the user for an action. In this case, whether or not the given tickets should be imported within the logged in account. 
+
+**Note** If for whatever reason your app is interrupted between the time you receive the broadcast event and the time you start the keyper sdk, the deep link information will be lost and the user will have to open it again.
 
 ### Customization
 
