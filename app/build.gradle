@@ -48,7 +48,7 @@ dependencies {
     }
 
     // import the keyper SDK.
-    compile('io.keyper.android:keyper-sdk:0.9.3') {
+    compile('io.keyper.android:keyper-sdk:0.9.4') {
         transitive = true // in order to load the dependencies of the SDK
     }
 

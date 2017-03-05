@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     // unregister the broadcast receiver for deep link events.
     LocalBroadcastManager.getInstance(this).unregisterReceiver(mDeepLinkBroadcastReceiver);
 
-    super.onPause();
+    super.onStop();
   }
 
   // for branch.io
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     Note that the provided auth_token might be invalid when you try this code. To generate a new one, use the
     keyper_auth_token.sh provided with this sample.
 
-    Note that the branch.io branchParamters are passed to the sdk. If they contain keyper deep links, the sdk
+    Note that the branch.io branchParameters are passed to the sdk. If they contain keyper deep links, the sdk
     will handle them correctly.
    */
   private void authenticateAndStartKeyper(JSONObject branchParameters) {
