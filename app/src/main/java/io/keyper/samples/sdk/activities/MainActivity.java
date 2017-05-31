@@ -26,7 +26,7 @@ import io.keyper.samples.sdk.services.GCMRegistrationIntentService;
 public class MainActivity extends AppCompatActivity {
 
   private static final String ROUTE_IDENTIFIER = "keyper";
-  private static final String HOST_APP_TOKEN = "6b5cf70e-aa72-4c7a-94f4-36dce704a19b";
+  private static final String HOST_APP_TOKEN = "6862e71e-f328-457f-a7fa-38dd9b1ce850";
 
   // in some cases the keyper sdk needs to prompt the user for some input.
   // when this happens, the keyper sdk will broadcast an event. Once such an event is captured, the
@@ -184,8 +184,8 @@ public class MainActivity extends AppCompatActivity {
     // or use your own activity with the KeyperTicketsFragment. For an example, comment the line above and
     // uncomment one of the lines below:
 
-    //startActivity(new Intent(MainActivity.this, CustomXMLTicketsActivity.class));
-    //startActivity(new Intent(MainActivity.this, CustomTicketsActivity.class));
+    // startActivity(new Intent(MainActivity.this, CustomXMLTicketsActivity.class));
+    // startActivity(new Intent(MainActivity.this, CustomTicketsActivity.class));
   }
 
   /*

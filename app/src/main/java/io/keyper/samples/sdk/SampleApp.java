@@ -34,6 +34,7 @@ public class SampleApp extends Application {
   private void initKeyperSDK() {
     mKeyperSDK = KeyperSDK
         .with(this)
+        .appSecret("sdk_android_sample_secret")
         .baseURL("https://sandbox.api.keyper.io/api") // this should be set only when BuildConfig.DEBUG == true
         .actionColorResource(R.color.colorAccent)
         .toolbarBackgroundColorResource(R.color.colorPrimary)
