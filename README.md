@@ -3,7 +3,7 @@
  
 Contact: *dev@keyper.io*
 
-Last Updated: *06.12.2016*
+Last Updated: *31.05.2017*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 
@@ -23,7 +23,7 @@ Then include the keyper SDK as a dependency:
 
 ```
 dependencies {
-	compile 'io.keyper.android:keyper-sdk:0.9.3'
+	compile 'io.keyper.android:keyper-sdk:0.9.5'
 }
 ```
 
@@ -90,7 +90,7 @@ If you want to see a working app, please checkout this repository.
 
 Once you checkout the repository, you will have to do a few things in order to test all features of the SDK.
 
-1) Create and login with your own keyper test user with the `keyper_auth_token.sh` script. It will give you an auth token (uuid), which you can then change in the `MainActivity#HOST_APP_TOKEN`. You will have to add a new token each time you logout from the app. Note that usually you will receive a toke
+1) Create and login with your own keyper test user with the `keyper_auth_token.sh` script. It will give you an auth token (uuid), which you can then change in the `MainActivity#HOST_APP_TOKEN`. You will have to add a new token each time you logout from the app. Note that usually you will receive a token
 from an Oauth Service or similar.
 
 2) (Optional) Add your own gcm_id in `app/build.gradle` if you want to test the push notifications as well. If you are not sure how to do this, please consult the [GCM guide](https://developers.google.com/cloud-messaging/gcm).
@@ -110,10 +110,14 @@ The SDK consists of a singleton instance that exposes some helper methods and a 
 To initialize the SDK, you can use the following snippet in your Application or any Activity.
 
 ```
-KeyperSDK sdk = KeyperSDK.with(this).get();
+KeyperSDK sdk = KeyperSDK.with(this).appSecret("yourAppSecret").get();
 ```        
 
-`this` is a Context object. Note, that it is recommended to use an activity or the Application object, if you are making use of GCM and the keyper notifications. Read more in the Notifications chapter.
+`this` is a Context object.
+
+Note, that you will have to obtain an app secret from the b2b web app. Read the Login Chapter for more info on this.
+
+Note, that it is recommended to use an activity or the Application object, if you are making use of GCM and the keyper notifications. Read more in the Notifications chapter.
 
 Keep a reference to the SDK in order to interact with it. Alternatively, you can obtain a reference to the SDK with:
 
@@ -128,7 +132,7 @@ To avoid this, you can check if the SDK is initialized by calling: `sdk.isInitia
 ### Login
 Once you have the SDK configured, you can connect a user of your app with the keyper service. To do so, you have to configure your keyper b2b account in the keyper [b2b web app](https://app.keyper.io/b2b.html#) or the keyper [b2b sandbox webapp](https://sandbox.app.keyper.io/b2b.html#).
 
-There you can configure a route identifier, which you will need in order to oauth with the keyper service.
+There you can configure an app secret, as well as a route identifier, which you will need in order to oauth with the keyper service.
 
 In order to authenticate the user against the keyper service, use the following code snippet:
 
@@ -250,6 +254,7 @@ The SDK allows you to customize the activities, fragments and views a bit, in or
 ```
 KeyperSDK keyperSDK = KeyperSDK
         .with(this)
+        .appSecret("mySuperSafeAppSecretFromTheB2BWebApp")
         .baseURL("https://sandbox.api.keyper.io/api")
         .actionColorResource(R.color.colorAccent)
         .toolbarBackgroundColorResource(R.color.colorPrimary)
@@ -263,6 +268,7 @@ KeyperSDK keyperSDK = KeyperSDK
 
 | method | description | default value|
 |--------|-------------|--------------|
+| appSecret(String)| Sets an app secret that authenticates your version of the SDK | The default value is an empty string, which is not a valid app secret|
 | baseURL(String) | Allows you to change the base url of the keyper service. For example, if, you want to develop against the keyper sandbox environment. | https://api.keyper.io/api |
 | actionColorResource | Sets a color resource, that is used throughout the sdk, for specific elements and views. It is recommended to take the accent color.  | The default value resolves to: #00cc99 |
 | toolbarBackgroundColorResource | Sets a color resource, that is used in the toolbars throughout activities in the SDK. | The default value resolves to: #00cc99 |
