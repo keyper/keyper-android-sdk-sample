@@ -199,7 +199,7 @@ You can use a sessionCallback (as within the login operation), if you want to ge
 ### Notifications
 If you want your users to obtain keyper notifications, e.g. when they get a new ticket offer, or a new friend request, then you have to take the following actions.
 
-1) submit the device registration id (GCM Push Token) to the sdk. You can do so, via:
+1) submit the device registration id (GCM Push Token) to the sdk. Note, that you have to have a valid user session, so you have to login first. You can do so, via:
 
 ```
 sdk.subscribeForPushNotifications(gcmToken); // gcmToken is a String

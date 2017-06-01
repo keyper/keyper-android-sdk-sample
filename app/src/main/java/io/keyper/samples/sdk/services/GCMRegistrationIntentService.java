@@ -39,7 +39,7 @@ public class GCMRegistrationIntentService extends IntentService {
     Log.d("GCM", token);
 
     KeyperSDK sdk = ((SampleApp) getApplication()).getKeyperSDK();
-    if (sdk.isInitialized()) {
+    if (sdk.isInitialized() && sdk.isAuthenticated()) {
       sdk.subscribeForPushNotifications(token);
     }
   }

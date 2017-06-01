@@ -26,7 +26,7 @@ import io.keyper.samples.sdk.services.GCMRegistrationIntentService;
 public class MainActivity extends AppCompatActivity {
 
   private static final String ROUTE_IDENTIFIER = "keyper";
-  private static final String HOST_APP_TOKEN = "6862e71e-f328-457f-a7fa-38dd9b1ce850";
+  private static final String HOST_APP_TOKEN = "755f6a6a-6e46-4945-abd6-49349d8d5a51";
 
   // in some cases the keyper sdk needs to prompt the user for some input.
   // when this happens, the keyper sdk will broadcast an event. Once such an event is captured, the
@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
         }
       });
     }
-
-    // registers this app for push notifications (you have to add a GCM id in build.gradle)
-    registerForPushNotifications();
 
     // checks if the activity is started from a notification. This is just an example. Read more in the README and in
     // SampleGCMListenerService
@@ -179,6 +176,10 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void startKeyper() {
+    // registers this app and user for push notifications (you have to add a GCM id in build.gradle)
+    registerForPushNotifications();
+
+    // and start the ticketing section.
     KeyperTicketsActivity_.intent(this).start();
 
     // or use your own activity with the KeyperTicketsFragment. For an example, comment the line above and
