@@ -36,6 +36,7 @@ public class SampleApp extends Application {
         .with(this)
         .appSecret("sdk_android_sample_secret")
         .baseURL("https://sandbox.api.keyper.io/api") // this should be set only when BuildConfig.DEBUG == true
+        //.displayNotificationsInStatusBar(true) // set to true, if you want to handleNotification to always display a statusbar notification
         .actionColorResource(R.color.colorAccent)
         .toolbarBackgroundColorResource(R.color.colorPrimary)
         .toolbarTextColorResource(R.color.white)

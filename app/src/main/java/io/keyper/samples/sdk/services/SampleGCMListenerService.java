@@ -39,11 +39,12 @@ public class SampleGCMListenerService extends GcmListenerService {
           break;
       }
 
-      // passes the notification for handling by the sdk
-      sdk.handleNotification(bundle, pendingIntent);
+      // if you just want to display the notification in the status bar
+      sdk.displayNotificationInStatusBar(bundle, pendingIntent);
 
-      // if you don't want the notification (in the system bar) to react to a user click, then you can use:
-      //sdk.handleNotification(bundle);
+
+      // if you want to display an in app notification then you obtain some basic textual info here
+      // sdk.getKeyperNotification(bundle)
 
     } else {
       Log.d("GCM", "notification received: " + bundle);

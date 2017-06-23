@@ -1,9 +1,9 @@
 # Keyper Android SDK Developers Guide
-**SDK Version: 0.9.+**
+**SDK Version: 0.9.6**
  
 Contact: *dev@keyper.io*
 
-Last Updated: *31.05.2017*
+Last Updated: *23.06.2017*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 
@@ -199,7 +199,9 @@ You can use a sessionCallback (as within the login operation), if you want to ge
 ### Notifications
 If you want your users to obtain keyper notifications, e.g. when they get a new ticket offer, or a new friend request, then you have to take the following actions.
 
-1) submit the device registration id (GCM Push Token) to the sdk. Note, that you have to have a valid user session, so you have to login first. You can do so, via:
+#### Registration
+
+Submit the device registration id (GCM Push Token) to the sdk. Note, that you have to have a valid user session, so you have to login first. You can do so, via:
 
 ```
 sdk.subscribeForPushNotifications(gcmToken); // gcmToken is a String
@@ -207,7 +209,8 @@ sdk.subscribeForPushNotifications(gcmToken); // gcmToken is a String
 
 You should call this method every time, when the gcm token gets refreshed. Follow the link to see how to obtain and handle [GCM push notifications on android](https://developers.google.com/cloud-messaging/android/client).
 
-2) In order to allow the keyper SDK to handle the received notifications, you have to propagate them to the SDK, once you received them. The SDK offers you a few helper methods, to help you do that.
+#### Handling
+In order to allow the keyper SDK to handle the received notifications, you have to propagate them to the SDK, once you received them. The SDK offers you a few helper methods, to help you do that.
 
 Once you obtain a notification (a Bundle object usually in `GcmListenerService.onMessageReceived(String s, Bundle bundle)`), you can inspect the notification like so:
 
@@ -233,6 +236,12 @@ There is one issue with this type of notification handling. Nothing will happen,
 You can use: `sdk.getRecommendedAction(bundle);`, which will return a `KeyperNotificationRecommendedHostAppAction` enum.
 
 The enum has a few recommended actions, which you can use as a hint to infer what kind of PendingIntent to set. In general, you can prepare a pending intent showing the KeyperTicketsActivity or your own wrapping activity of KeyperTicketsFragment, or you have to first login and then start the KeyperTicketsActivity or your own one.
+
+If you, for some reason, want to always display a notification in the status bar, then you can initialize the sdk with the `displayNotificationsInStatusBar(true)` method. This will force `handleNotification` to always display the PN.
+There is also a helper method `sdk.displayNotificationInStatusBar(bundle, pendingIntent);` which allows you to directly display a push notification. Once again, be sure to check the recommended action, in order to setup the pending intent correctly.
+
+#### InApp Notifications
+Some apps will want to display the notifications as In-App Notifications. In order to deserialize the message, there is a helper method `sdk.getKeyperNotification(Bundle)`, that retrieves a POJO of the keyper notification. Currently this is a very simple class with only to fields `title` and `text`. In the future, this will be extended to provide more infos as they become necessary. 
 
 ### Deep Linking with Branch.io
 
@@ -268,15 +277,16 @@ KeyperSDK keyperSDK = KeyperSDK
 
 | method | description | default value|
 |--------|-------------|--------------|
-| appSecret(String)| Sets an app secret that authenticates your version of the SDK | The default value is an empty string, which is not a valid app secret|
-| baseURL(String) | Allows you to change the base url of the keyper service. For example, if, you want to develop against the keyper sandbox environment. | https://api.keyper.io/api |
-| actionColorResource | Sets a color resource, that is used throughout the sdk, for specific elements and views. It is recommended to take the accent color.  | The default value resolves to: #00cc99 |
-| toolbarBackgroundColorResource | Sets a color resource, that is used in the toolbars throughout activities in the SDK. | The default value resolves to: #00cc99 |
-| toolbarTextColorResource | Sets a color resource for the text color used in toolbars throughout the SDK | The default value resolves to: #ffffff |
-| toolbarTitleSizeResource | Sets a dimen resource for the text size used in the KeyperTicketsActivity. | The default value is: 10sp |
-| toolbarTitleResource | Sets the i18n string resource used in the KeyperTicketsActivity. | The default value resolves to: "Tickets" |
-| toolbarTypeface | Sets a custom typeface in the KeyperTicketsActivity toolbar. | The default is: Typeface.create("sans-serif-medium", Typeface.NORMAL); |
-| sendTicketBadgeDrawableResource | Sets a custom badge in some keyper views, to denote that the user already is a user of your app. | The default is null |
+| appSecret(String)| Sets an app secret that authenticates your version of the SDK | The default value is an `empty string`, which is not a valid app secret|
+| baseURL(String) | Allows you to change the base url of the keyper service. For example, if, you want to develop against the keyper sandbox environment. | `https://api.keyper.io/api` |
+| actionColorResource | Sets a color resource, that is used throughout the sdk, for specific elements and views. It is recommended to take the accent color.  | The default value resolves to: `#00cc99` |
+| toolbarBackgroundColorResource | Sets a color resource, that is used in the toolbars throughout activities in the SDK. | The default value resolves to: `#00cc99` |
+| toolbarTextColorResource | Sets a color resource for the text color used in toolbars throughout the SDK | The default value resolves to: `#ffffff` |
+| toolbarTitleSizeResource | Sets a dimen resource for the text size used in the KeyperTicketsActivity. | The default value is: `10sp` |
+| toolbarTitleResource | Sets the i18n string resource used in the KeyperTicketsActivity. | The default value resolves to: `"Tickets"` |
+| toolbarTypeface | Sets a custom typeface in the KeyperTicketsActivity toolbar. | The default is: `Typeface.create("sans-serif-medium", Typeface.NORMAL);` |
+| sendTicketBadgeDrawableResource | Sets a custom badge in some keyper views, to denote that the user already is a user of your app. | The default is `null` |
+| displayNotificationsInStatusBar | A boolean flag which denotes if a notification should always be shown, when calling `handleNotification`, disregarding the foreground state of the app | The default is `false` |
 
 **Note**: FontUtils is a helper class, that reads a custom font (lobster) from an asset. It is included in the sample project.
 
