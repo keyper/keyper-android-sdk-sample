@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 repositories {
     jcenter()
-    maven { url "http://sdk.repo.keyper.io/artifactory/keyper" }
+    maven { url "http://sdk.keyper.io/artifactory/keyper" }
 }
 
 def gcm_id = "\"\"" // Add your GCM sender id

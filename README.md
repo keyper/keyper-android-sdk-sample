@@ -3,7 +3,7 @@
  
 Contact: *dev@keyper.io*
 
-Last Updated: *28.06.2017*
+Last Updated: *29.06.2017*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 
@@ -13,7 +13,7 @@ In order to get started, fire up Android Studio and add the following snippet to
 ```
 repositories {
     jcenter()
-    maven { url ""http://sdk.repo.keyper.io/artifactory/keyper"" }
+    maven { url ""http://sdk.keyper.io/artifactory/keyper"" }
 }
 ```
 
