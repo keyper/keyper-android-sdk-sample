@@ -23,7 +23,7 @@ Then include the keyper SDK as a dependency:
 
 ```
 dependencies {
-	compile 'io.keyper.android:keyper-sdk:0.9.5'
+	compile 'io.keyper.android:keyper-sdk:0.9.6'
 }
 ```
 
