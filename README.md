@@ -13,7 +13,7 @@ In order to get started, fire up Android Studio and add the following snippet to
 ```
 repositories {
     jcenter()
-    maven { url ""http://sdk.keyper.io/artifactory/keyper"" }
+    maven { url "http://sdk.keyper.io/artifactory/keyper" }
 }
 ```
 
