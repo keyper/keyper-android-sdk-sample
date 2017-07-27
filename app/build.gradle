@@ -43,6 +43,6 @@ dependencies {
         transitive = true // in order to load the dependencies of the SDK
     }
     // import the keyper SDK.
-    compile('io.keyper.android:keyper-sdk:0.9.8')
+    compile('io.keyper.android:keyper-sdk:1.0.0')
     testCompile 'junit:junit:4.12'
 }
