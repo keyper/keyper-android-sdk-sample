@@ -1,9 +1,9 @@
 # Keyper Android SDK Developers Guide
-**SDK Version: 1.0.0**
+**SDK Version: 1.0.4**
  
 Contact: *dev@keyper.io*
 
-Last Updated: *27.07.2017*
+Last Updated: *7.09.2017*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 
@@ -23,7 +23,7 @@ Then include the keyper SDK as a dependency:
 
 ```
 dependencies {
-	compile 'io.keyper.android:keyper-sdk:1.0.0'
+	compile 'io.keyper.android:keyper-sdk:1.0.4'
 }
 ```
 
