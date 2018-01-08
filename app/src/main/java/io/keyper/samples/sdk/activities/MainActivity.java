@@ -26,7 +26,7 @@ import io.keyper.samples.sdk.services.GCMRegistrationIntentService;
 public class MainActivity extends AppCompatActivity {
 
   private static final String ROUTE_IDENTIFIER = "keyper";
-  private static final String HOST_APP_TOKEN = "755f6a6a-6e46-4945-abd6-49349d8d5a51";
+  private static final String HOST_APP_TOKEN = "0163de57-7cb5-4937-affb-6c2deb587cc2";
 
   // in some cases the keyper sdk needs to prompt the user for some input.
   // when this happens, the keyper sdk will broadcast an event. Once such an event is captured, the
