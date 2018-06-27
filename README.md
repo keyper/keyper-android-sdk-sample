@@ -1,9 +1,9 @@
 # Keyper Android SDK Developers Guide
-**SDK Version: 1.0.9**
+**SDK Version: 1.0.10**
  
 Contact: *dev@keyper.io*
 
-Last Updated: *08.01.2017*
+Last Updated: *27.06.2018*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 
@@ -291,6 +291,23 @@ KeyperSDK keyperSDK = KeyperSDK
 **Note**: FontUtils is a helper class, that reads a custom font (lobster) from an asset. It is included in the sample project.
 
 **Important**: If you initialize your SDK more than once in a single session, the values will be overwritten with the once you use last. If you customize the SDK make sure, you set the properties, each time and in all places where you setup the SDK. It is recommended, that you do the SDK initialization in a single place.
+
+### Proguard
+
+If you are using proguard, you might need to include the following in your proguard file:
+
+```
+-dontwarn com.google.android.gms.**
+-dontwarn io.keyper.**
+-dontwarn com.google.firebase.appindexing.**
+-dontwarn io.branch.**
+-dontwarn okio.**
+-dontwarn okhttp3.**
+
+-keep class io.keyper.** { *; }
+-keep class com.google.android.gms.** { *; }
+-keep class okhttp3.** { *; }
+```
 
 ## Feedback
 If you have any questions, feedback, bugs to report, please do not hesitate contacting dev@keyper.io

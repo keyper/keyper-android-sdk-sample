@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "io.keyper.samples.sdk"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -34,15 +34,15 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.0.1'
-    compile 'com.android.support:design:27.0.1'
-    compile 'com.google.android.gms:play-services-gcm:10.2.1'
-    compile 'com.google.android.gms:play-services-maps:10.2.1'
+    compile 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.android.support:design:27.1.1'
+    compile 'com.google.android.gms:play-services-gcm:15.0.1'
+    compile 'com.google.android.gms:play-services-maps:15.0.1'
     //    // if you use branch to start your app from a website, you will have to add this.
     compile('io.branch.sdk.android:library:2.+') {
         transitive = true // in order to load the dependencies of the SDK
     }
     // import the keyper SDK.
-    compile('io.keyper.android:keyper-sdk:1.0.9')
+    compile('io.keyper.android:keyper-sdk:1.0.10')
     testCompile 'junit:junit:4.12'
 }

@@ -15,3 +15,14 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn com.google.android.gms.**
+-dontwarn io.keyper.**
+-dontwarn com.google.firebase.appindexing.**
+-dontwarn io.branch.**
+-dontwarn okio.**
+-dontwarn okhttp3.**
+
+-keep class io.keyper.** { *; }
+-keep class com.google.android.gms.** { *; }
+-keep class okhttp3.** { *; }
