@@ -1,9 +1,9 @@
 # Keyper Android SDK Developers Guide
-**SDK Version: 1.0.10**
+**SDK Version: 1.0.11**
  
 Contact: *dev@keyper.io*
 
-Last Updated: *27.06.2018*
+Last Updated: *11.07.2018*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 
@@ -23,13 +23,17 @@ Then include the keyper SDK as a dependency:
 
 ```
 dependencies {
-	compile 'io.keyper.android:keyper-sdk:1.0.9'
+	compile 'io.keyper.android:keyper-sdk:1.0.11'
 }
 ```
 
 Hit Sync, gradle will build the project and you should be ready to go.
 
 #### Troubleshooting
+
+Here we collect some common issues. Please take a look if you run into some issues. If you still have troubles, please do not hesitate contacting us.
+
+##### Multidex
 If you get the following error while building, then you have to enable multi dex support. You can learn more at the link below.
 
 ```
@@ -46,7 +50,7 @@ multiDexEnabled true
 Then add this dependency to your build.gradle dependencies closure: 
 
 ```
-compile 'com.android.support:multidex:1.0.1'
+compile 'com.android.support:multidex:1.0.3'
 ``` 
 
 Finally, you have to add use a MiltiDexApplication class. If you do not use a custom Application class, then just add the following to your `application` tag in AndroidManifest.xml
@@ -67,6 +71,18 @@ dexOptions {
 	javaMaxHeapSize "2g" // "4g"
 }
 ```
+
+##### Version conflicts
+If you utilise the support library or the play-services library, you might get version conflicts. In order to handle these,
+please exclude them from the keyper-sdk dependency. However, keep in mind that the SDK needs the following dependencies,
+so you might need to introduce newer versions of these manually. If you still have troubles, please contact us.
+
+```
+com.android.support:appcompat-v7
+com.android.support:design
+com.google.android.gms:play-services-base
+com.google.android.gms:play-services-maps
+```  
 
 ## General
 The `minSdkVersion` of the keyper SDK ist 15 (Android 4.0.3 IceCreamSandwich).
