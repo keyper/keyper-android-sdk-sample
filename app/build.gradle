@@ -8,13 +8,13 @@ repositories {
 def gcm_id = "\"\"" // Add your GCM sender id
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "io.keyper.samples.sdk"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -33,16 +33,16 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.1.1'
-    compile 'com.android.support:design:27.1.1'
-    compile 'com.google.android.gms:play-services-gcm:15.0.1'
-    compile 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
     //    // if you use branch to start your app from a website, you will have to add this.
-    compile('io.branch.sdk.android:library:2.+') {
+    implementation('io.branch.sdk.android:library:2.+') {
         transitive = true // in order to load the dependencies of the SDK
     }
     // import the keyper SDK.
-    compile('io.keyper.android:keyper-sdk:1.0.10')
-    testCompile 'junit:junit:4.12'
+    implementation ('io.keyper.android:keyper-sdk:1.1.1')
+    testImplementation 'junit:junit:4.12'
 }

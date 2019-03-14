@@ -5,16 +5,15 @@ import org.json.JSONObject;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import io.branch.referral.Branch;
 import io.branch.referral.BranchError;
 import io.keyper.android.sdk.KeyperSDK;
@@ -26,7 +25,7 @@ import io.keyper.samples.sdk.services.GCMRegistrationIntentService;
 public class MainActivity extends AppCompatActivity {
 
   private static final String ROUTE_IDENTIFIER = "keyper";
-  private static final String HOST_APP_TOKEN = "0163de57-7cb5-4937-affb-6c2deb587cc2";
+  private static final String HOST_APP_TOKEN = "7d66c9db-9577-4aa6-a81f-d3dcd30c455f";
 
   // in some cases the keyper sdk needs to prompt the user for some input.
   // when this happens, the keyper sdk will broadcast an event. Once such an event is captured, the
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     super.onStart();
 
     // we register a broadcast receiver if the keyper sdk has to summon the keyper root view.
-    LocalBroadcastManager.getInstance(this).registerReceiver(mDeepLinkBroadcastReceiver, new IntentFilter(KeyperSDK.Events.KPR_BCR_ACTION_SHOW_KEYPER_SCREEN));
+    //LocalBroadcastManager.getInstance(this).registerReceiver(mDeepLinkBroadcastReceiver, new IntentFilter(KeyperSDK.Events.KPR_BCR_ACTION_SHOW_KEYPER_SCREEN));
 
     // we obtain a branch instance and wait for it to finish.
     Branch branch = Branch.getInstance();

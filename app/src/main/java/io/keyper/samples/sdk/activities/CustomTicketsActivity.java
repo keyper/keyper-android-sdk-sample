@@ -1,8 +1,8 @@
 package io.keyper.samples.sdk.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import io.keyper.android.sdk.KeyperTicketsFragment_;
 import io.keyper.samples.sdk.R;
 
