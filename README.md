@@ -146,7 +146,7 @@ Note, however, that if it is not initialized some of the helper methods will thr
 To avoid this, you can check if the SDK is initialized by calling: `sdk.isInitialized();`
 
 ### Login
-Once you have the SDK configured, you can connect a user of your app with the keyper service. To do so, you have to configure your keyper b2b account in the keyper [b2b web app](https://app.keyper.io/b2b.html#) or the keyper [b2b sandbox webapp](https://sandbox.app.keyper.io/b2b.html#).
+Once you have the SDK configured, you can connect a user of your app with the keyper service. To do so, you have to configure your keyper b2b account in the keyper [b2b web app](https://app.keyper.io/business) or the keyper [b2b sandbox webapp](https://sandbox.app.keyper.io/business).
 
 There you can configure an app secret, as well as a route identifier, which you will need in order to oauth with the keyper service.
 
