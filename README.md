@@ -1,9 +1,9 @@
 # Keyper Android SDK Developers Guide
-**SDK Version: 1.0.11**
+**SDK Version: 1.1.1**
  
 Contact: *dev@keyper.io*
 
-Last Updated: *11.07.2018*
+Last Updated: *14.03.2019*
 
 The keyper SDK offers developers a complete mobile ticket solution, that they can include and use within their apps.
 

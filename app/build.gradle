@@ -20,7 +20,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             buildConfigField "String", "GCM_SENDER_ID", "${gcm_id}"
@@ -34,10 +34,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation "androidx.appcompat:appcompat:1.1.0-alpha02"
+    implementation "com.google.android.material:material:1.1.0-alpha04"
+    implementation 'com.google.android.gms:play-services-gcm:16.1.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
     //    // if you use branch to start your app from a website, you will have to add this.
     implementation('io.branch.sdk.android:library:2.+') {
         transitive = true // in order to load the dependencies of the SDK
